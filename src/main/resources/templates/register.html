@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<link th:href="@{/style/main.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/style/register.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/style/bootstrap/css/bootstrap.min.css}"
+	rel="stylesheet" type="text/css">
+<title>Insert title here</title>
+</head>
+
+<body>
+	<div th:replace="header"></div>
+	<div class="context"></div>
+	<div class="area">
+		<div class="container">
+			<ul class="circles">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+			<h5></h5>
+			<h1>戦績登録</h1>
+			<br>
+			<div class="col-lg-6">
+				<h6>対戦日</h6>
+				<label class="date"> <input type="date" />
+				</label> <br /> <br />
+				<div class="stuff">
+					<div class="textBox">
+						<input class="text" type="textbox" placeholder="使用機体"
+							onkeyup="this.setAttribute('value', this.value);" value="" /> <label
+							class="label">使用機体</label> <label class="error"></label>
+					</div>
+				</div>
+				<div class="col-lg-6">
+					<ul>
+						<li><input type="radio" id="f-option" name="selector">
+							<label class="radio" for="f-option">フリー</label>
+
+							<div class="check"></div></li>
+
+						<li><input type="radio" id="s-option" name="selector">
+							<label class="radio" for="s-option">シャッフル</label>
+
+							<div class="check">
+								<div class="inside"></div>
+							</div></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="footer"></div>
+</body>
+
+</html>

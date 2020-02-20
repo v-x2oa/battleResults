@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<link th:href="@{/style/main.css}" rel="stylesheet" type="text/css">
+	<link th:href="@{/style/bootstrap/css/bootstrap.min.css}" rel="stylesheet" type="text/css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
+	<title></title>
+</head>
+<body>
+	<div th:replace="header"></div>
+	<div class="context"></div>
+	<div class="area">
+		<ul class="circles">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<div class="container">
+			<h5></h5>
+			<h1><span th:text="${totalMatch}"></span>戦 <span th:text="${totalWin}"></span>勝 <span
+					th:text="${totalRate}"></span>%</h1>
+			<div class="row">
+				<div class="col-lg-6 pink">
+					<canvas id="myPieChart"></canvas>
+					<script type="text/javascript" th:inline="javascript">
+						/*<![CDATA[*/
+						var ctx = document.getElementById("myPieChart");
+						var myPieChart = new Chart(ctx, {
+							type: 'pie',
+							data: {
+								labels: /*[[ ${vicOrDef} ]]*/,
+								datasets: [{
+									backgroundColor: [
+										"#FF3366",
+										"#808080"
+									],
+									data: /*[[ ${thisMonthRate} ]]*/
+								}]
+							},
+							options: {
+								title: {
+									display: true,
+									text: '月間戦績'
+								}
+							}
+						});
+						/*]]>*/
+					</script>
+				</div>
+				<div class="col-lg-6 skyblue">
+					<canvas id="myCostChart"></canvas>
+					<script type="text/javascript" th:inline="javascript">
+						/*<![CDATA[*/
+						var ctx = document.getElementById("myCostChart");
+						var myPieChart = new Chart(ctx, {
+							type: 'pie',
+							data: {
+								labels: /*[[ ${cost} ]]*/,
+								datasets: [{
+									backgroundColor: [
+										"#CCFF00",
+										"#FFFF66",
+										"#FF9933",
+										"#FF3366"
+									],
+									data: /*[[ ${costRate} ]]*/,
+								}]
+							},
+							options: {
+								title: {
+									display: true,
+									text: '使用コスト'
+								}
+							}
+						});
+						/*]]>*/
+					</script>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-lg-6 pink">
+					<canvas id="myTeamChart"></canvas>
+					<script type="text/javascript" th:inline="javascript">
+						/*<![CDATA[*/
+						var ctx = document.getElementById("myTeamChart");
+						var myPieChart = new Chart(ctx, {
+							type: 'pie',
+							data: {
+								labels: /*[[ ${rule} ]]*/,
+								datasets: [
+									{
+										backgroundColor: [
+											"#9933FF",
+											"#339933"
+										],
+										data: /*[[ ${ruleRate} ]]*/
+									},
+								]
+							},
+							options: {
+								title: {
+									display: true,
+									text: 'チーム割合'
+								}
+							}
+						});
+						/*]]>*/
+					</script>
+				</div>
+				<div class="col-lg-6 pink">
+					<canvas id="monthChart"></canvas>
+					<script type="text/javascript" th:inline="javascript">
+						Chart.defaults.global.defaultFontColor = 'white';
+						/*<![CDATA[*/
+						var ctx = document.getElementById("monthChart").getContext('2d');
+						var myChart = new Chart(ctx, {
+							type: 'bar',
+							data: {
+								labels: /*[[ ${monthLabel} ]]*/,
+								datasets: [
+									{
+										label: "2020年1月",
+										backgroundColor: "#FF3366",
+										lineTension: 0,
+										fill: false,
+										data: /*[[ ${monthWinRate} ]]*/
+									},
+								]
+							},
+							options: {
+								title: {
+									display: true,
+									text: '月別戦績'
+								},
+								legend: {
+									labels: {
+										// このフォント設定はグローバルプロパティを上書きします。
+										fontColor: 'white'
+									}
+								},
+								scales: {
+									yAxes: [{
+										ticks: {
+											suggestedMax: 100,
+											suggestedMin: 0,
+											stepSize: 20,
+											callback: function (value, index, values) {
+												return value + '%'
+											}
+										}
+									}]
+								},
+							}
+						});
+					    /*]]>*/
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="footer"></div>
+</body>
+
+</html>
